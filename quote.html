@@ -686,7 +686,7 @@ textarea:focus-visible {
 </head>
 <body>
 
-    <!-- HEADER WITH CENTERED LOGO AND BACK BUTTON -->
+  <!-- HEADER WITH CENTERED LOGO AND BACK BUTTON -->
     <header class="site-header">
         <div class="header-container">
             <a href="/" class="back-btn">
@@ -706,7 +706,7 @@ textarea:focus-visible {
 
         <div class="form-card">
             <h1>Get Your Free, Fast Quote</h1>
-            <p>Tell us what you need cleaned or lit we’ll measure your property and text or email your estimate today.</p>
+            <p>Tell us what you need cleaned, we'll review your details and text or email your estimate today.</p>
 
             <!-- Status Message Banner -->
             <div id="status-banner" class="message-banner">
@@ -720,7 +720,7 @@ textarea:focus-visible {
                 <input type="hidden" name="_next" value="https://rush-cleaning.stefanswebdesigns.workers.dev/thanks">
                 
                 <!-- Form Configurations -->
-                <input type="hidden" name="_subject" value="New Quote Request - Crossroads Mobile RV Service">
+                <input type="hidden" name="_subject" value="New Quote Request - Cleaning Service">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
                 
@@ -738,7 +738,6 @@ textarea:focus-visible {
                     <div class="form-group">
                         <input type="tel" id="phone" name="phone" placeholder=" " required />
                         <label for="phone">Phone Number</label>
-
                     </div>
                 </div>
 
@@ -752,14 +751,14 @@ textarea:focus-visible {
                 <div class="form-row">
                     <div class="form-group">
                         <input type="text" id="street-address" name="street_address" placeholder=" " required />
-                        <label for="street-address">Property Street Address</label>
-                        <span class="helper-text">Used for satellite measuring so we don't have to bother you for a quote.</span>
+                        <label for="street-address">Property Street Address / Location</label>
+                        <span class="helper-text">Used to understand your location and service requirements.</span>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="radio-group-container">
-                        <span class="radio-group-label">Property Type</span>
+                        <span class="radio-group-label">Service Setting</span>
                         <div class="radio-options">
                             <label class="radio-label">
                                 <input type="radio" name="property_type" value="Residential" checked />
@@ -767,7 +766,7 @@ textarea:focus-visible {
                             </label>
                             <label class="radio-label">
                                 <input type="radio" name="property_type" value="Commercial" />
-                                Commercial
+                                Commercial / Business
                             </label>
                         </div>
                     </div>
@@ -778,40 +777,28 @@ textarea:focus-visible {
 
                 <div class="checkbox-grid">
                     <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="House Siding & Patios" />
-                        <span>House Siding & Patios</span>
+                        <input type="checkbox" name="services[]" value="Homes & Deep Cleans" />
+                        <span>Homes & Deep Cleans <small style="display:block; font-weight:normal; opacity:0.8;">Seasonal fall/winter prep & routine cleaning</small></span>
                     </label>
                     <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="Driveways & Sidewalks" />
-                        <span>Driveways & Sidewalks</span>
+                        <input type="checkbox" name="services[]" value="Businesses & Offices" />
+                        <span>Businesses & Offices <small style="display:block; font-weight:normal; opacity:0.8;">Reliable commercial upkeep</small></span>
                     </label>
                     <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="Roof Softwash" />
-                        <span>Roof Softwash</span>
+                        <input type="checkbox" name="services[]" value="Vehicles & Detailing" />
+                        <span>Vehicles & Detailing <small style="display:block; font-weight:normal; opacity:0.8;">Cars, trucks, work rigs</small></span>
                     </label>
                     <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="Decks & Fencing" />
-                        <span>Decks & Fencing</span>
+                        <input type="checkbox" name="services[]" value="Campers & RVs" />
+                        <span>Campers & RVs <small style="display:block; font-weight:normal; opacity:0.8;">Pre-trip prep & winterizing cleanouts</small></span>
                     </label>
                     <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="Gutter Cleaning" />
-                        <span>Gutter Cleaning</span>
+                        <input type="checkbox" name="services[]" value="Move-In / Move-Out" />
+                        <span>Move-In / Move-Out <small style="display:block; font-weight:normal; opacity:0.8;">Full property turnovers</small></span>
                     </label>
                     <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="Window Cleaning" />
-                        <span>Window Cleaning</span>
-                    </label>
-                    <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="Sheds & Boat Docks" />
-                        <span>Sheds & Boat Docks</span>
-                    </label>
-                    <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="Commercial Cleaning" />
-                        <span>Commercial Cleaning</span>
-                    </label>
-                    <label class="checkbox-tile">
-                        <input type="checkbox" name="services[]" value="LED Holiday Lighting" />
-                        <span>LED Holiday Lighting</span>
+                        <input type="checkbox" name="services[]" value="Yard & Exterior Cleanup" />
+                        <span>Yard & Exterior Cleanup <small style="display:block; font-weight:normal; opacity:0.8;">Debris, leaves, heavy-duty outdoor jobs</small></span>
                     </label>
                 </div>
 
@@ -822,12 +809,12 @@ textarea:focus-visible {
                     <div class="form-group">
                         <select id="stories" name="stories" required>
                             <option value="" disabled selected></option>
-                            <option value="1 Story / Ranch">1 Story / Ranch</option>
-                            <option value="2 Stories">2 Stories</option>
-                            <option value="3+ Stories">3+ Stories</option>
-                            <option value="N/A (Driveway, Dock, or Commercial Flatwork only)">N/A (Driveway, Dock, or Commercial Flatwork only)</option>
+                            <option value="1 Story / Standard">1 Story / Standard</option>
+                            <option value="2+ Stories / Multi-Room">2+ Stories / Multi-Room</option>
+                            <option value="Vehicle / RV / Rig">Vehicle / RV / Rig</option>
+                            <option value="N/A / Exterior Yard Only">N/A / Exterior Yard Only</option>
                         </select>
-                        <label for="stories">How Many Stories?</label>
+                        <label for="stories">Property / Scope Scale</label>
                     </div>
                     <div class="form-group">
                         <select id="timeline" name="timeline" required>
@@ -844,7 +831,7 @@ textarea:focus-visible {
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder=" "></textarea>
                         <label for="message">Project Notes (Optional)</label>
-                        <span class="helper-text">Tell us about heavy moss, oil/rust stains, interior vs. exterior windows, or holiday lighting ideas...</span>
+                        <span class="helper-text">Tell us about specific rooms, vehicle types, square footage, or special requests...</span>
                     </div>
                 </div>
 
@@ -856,7 +843,7 @@ textarea:focus-visible {
                             <polyline points="17 8 12 3 7 8"></polyline>
                             <line x1="12" y1="3" x2="12" y2="15"></line>
                         </svg>
-                        <span class="file-upload-text">Have a photo of the area? Upload it here for an even faster quote!</span>
+                        <span class="file-upload-text">Have a photo of the area or vehicle? Upload it here for an even faster quote!</span>
                         <span class="file-upload-hint">Drag & drop files or click to browse (Max 5MB total)</span>
                     </label>
                     <input type="file" id="file-picker" class="file-picker-input" multiple accept="image/*,.pdf,.doc,.docx" />
@@ -869,12 +856,12 @@ textarea:focus-visible {
                     <span>Get My Free Quote</span>
                     <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
-<!-- Trust & Privacy Disclaimer -->
-<div class="form-trust-notice">
-    <span>By submitting this form, you agree to our <a href="privacy.html">privacy policy</a>. We'll never share your information.</span>
-</div>
 
                 <!-- Trust & Privacy Disclaimer -->
+                <div class="form-trust-notice">
+                    <span>By submitting this form, you agree to our <a href="privacy.html">privacy policy</a>. We'll never share your information.</span>
+                </div>
+
                 <div class="form-trust-notice">
                     <span>100% Free • No Obligation</span>
                 </div>
