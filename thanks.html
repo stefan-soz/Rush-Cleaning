@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Rush's Cleaning INC.</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+    /* ================= SYSTEM DESIGN TOKENS ================= */
+    :root {
+      --bg: #FFFFFF;
+      --text: #0F1115;
+      --text-muted: #555E6D;
+      --accent: #03214F;            
+      --accent-hover: #05337A;        
+      --steel: rgba(3, 33, 79, .25);
+      --border: rgba(15, 17, 21, .1);
+      --bg-card: #FFFFFF;
+      --focus-ring: #03214F;
+      --error: #DC2626;
+      --error-bg: #FEF2F2;
+      --success: #16A34A;
+      --success-bg: #F0FDF4;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 105px;
+    }
+
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: "Montserrat", sans-serif;
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* ================= ACCESSIBILITY FOCUS STATES ================= */
+    a:focus-visible,
+    button:focus-visible {
+        outline: 2px solid var(--focus-ring);
+        outline-offset: 3px;
+    }
+
+    /* ================= HEADER ================= */
+    .site-header {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 9999;
+        background: #FFFFFF;
+        border-bottom: 1px solid var(--border);
+        height: 96px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 2px 12px rgba(15, 17, 21, 0.04);
+        transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    }
+
+    .site-header.scrolled {
+        height: 78px;
+        box-shadow: 0 4px 20px rgba(15, 17, 21, 0.08);
+    }
+
+    .header-container {
+        width: 100%;
+        max-width: 1440px;
+        margin: 0 auto;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        position: relative;
+    }
+
+    .back-btn {
+        text-decoration: none;
+        background: var(--accent);
+        color: #FFFFFF;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 12px 22px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: background-color .25s ease, transform .2s ease;
+        z-index: 2;
+    }
+
+    .back-btn:hover {
+        background: var(--accent-hover);
+        transform: translateY(-2px);
+    }
+
+    .back-btn svg {
+        width: 14px;
+        height: 14px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.2;
+    }
+
+    .header-logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        padding: 8px 0;
+    }
+
+    .header-logo img {
+        height: 100%;
+        max-height: 76px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+        transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .site-header.scrolled .header-logo img {
+        max-height: 60px;
+    }
+
+    .header-spacer {
+        width: 120px;
+        z-index: 2;
+    }
+
+    /* ================= CONTAINER & LAYOUT ================= */
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 60px 20px 80px 20px;
+        width: 100%;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ================= THANK YOU CARD ================= */
+    .thank-you-card {
+        background: var(--bg-card);
+        border: 1px solid rgba(15, 17, 21, 0.12);
+        border-radius: 20px;
+        padding: 50px 36px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 4px 24px rgba(15, 17, 21, 0.04);
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .thank-you-card:hover {
+        border-color: var(--steel);
+    }
+
+    .success-icon {
+        width: 64px;
+        height: 64px;
+        background-color: rgba(3, 33, 79, 0.06);
+        border: 2px solid var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 24px auto;
+        color: var(--accent);
+    }
+
+    .success-icon svg {
+        width: 32px;
+        height: 32px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+    }
+
+    .thank-you-card h1 {
+        font-size: clamp(1.85rem, 3.2vw, 2.4rem);
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: -0.02em;
+        margin-bottom: 14px;
+    }
+
+    .thank-you-card p {
+        color: var(--text-muted);
+        font-size: 1.05rem;
+        margin-bottom: 24px;
+        line-height: 1.6;
+    }
+
+    .concept-notice {
+        background-color: rgba(3, 33, 79, 0.03);
+        border: 1px dashed var(--steel);
+        border-radius: 12px;
+        padding: 16px 20px;
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 36px;
+    }
+
+    .concept-notice strong {
+        color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+        .header-spacer {
+            display: none;
+        }
+        .thank-you-card {
+            padding: 36px 20px;
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER WITH CENTERED LOGO AND BACK BUTTON -->
+    <header class="site-header" id="mainHeader">
+        <div class="header-container">
+            <a href="index.html" class="back-btn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Home
+            </a>
+            
+            <a href="index.html" class="header-logo">
+                <img src="images/Logo2.png" alt="Logo">
+            </a>
+
+            <div class="header-spacer"></div>
+        </div>
+    </header>
+
+    <!-- THANK YOU CONTENT CONTAINER -->
+    <main class="container">
+        <div class="thank-you-card">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            
+            <h1>Request Received!</h1>
+            <p>We received your request and we will respond within 24 hours.</p>
+            
+            <div class="concept-notice">
+                <span><strong>Note:</strong> This is a concept site so the form was sent to Stefan's Web Designs.</span>
+            </div>
+
+            <a href="index.html" class="back-btn" style="width: 100%; max-width: 280px; margin: 0 auto;">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                Back to Home
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Header scroll behavior matching your quote page
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('mainHeader');
+            if (header) {
+                header.classList.toggle('scrolled', window.scrollY > 20);
+            }
+        });
+    </script>
+</body>
+</html>

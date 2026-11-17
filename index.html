@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+ <title>Rush's Cleaning INC.</title>
+ 
+   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<style>
+html {
+  scroll-behavior: smooth; 
+  scroll-padding-top: 105px; /* Accounts for sticky header height */
+}
+
+/* ================= SYSTEM DESIGN TOKENS ================= */
+:root {
+  --bg: #FFFFFF;
+  --text: #0F1115;
+  --text-muted: #555E6D;
+  --text-social: #555E6D;
+  --accent: #03214F;           
+  --accent-hover: #05337A;        
+  --steel: rgba(3, 33, 79, .25);
+  --border: rgba(15, 17, 21, .1);
+  --bg-card: #FFFFFF;
+  --focus-ring: #03214F;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+body.lock-scroll {
+  overflow: hidden;
+}
+
+/* ================= ACCESSIBILITY FOCUS STATES ================= */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* ================= STANDARD FULL-WIDTH WHITE HEADER ================= */
+#mainHeader {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background: #FFFFFF;
+  border-bottom: 1px solid var(--border);
+  height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(15, 17, 21, 0.04);
+  transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+}
+
+#mainHeader.scrolled {
+  height: 78px;
+  box-shadow: 0 4px 20px rgba(15, 17, 21, 0.08);
+}
+
+/* ================= HEADER INNER ================= */
+.header-inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 28px;
+  position: relative;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  height: 100%;
+  padding: 8px 0;
+}
+
+.logo-img {
+  height: 100%;
+  max-height: 76px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#mainHeader.scrolled .logo-img {
+  max-height: 60px;
+}
+
+/* ================= DESKTOP NAV ================= */
+.desktop-nav {
+  display: flex;
+  align-items: center;
+}
+
+.desktop-nav > ul {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  align-items: center;
+}
+
+.desktop-nav > ul > li {
+  position: relative;
+}
+
+.desktop-nav a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: color .2s ease, background-color .2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.desktop-nav > ul > li:hover > a,
+.desktop-nav > ul > li:focus-within > a {
+  color: var(--accent);
+  background: rgba(3, 33, 79, 0.06);
+}
+
+/* ================= RIGHT ZONE UTILITIES ================= */
+.right-zone {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.phone-link {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.phone-link:hover {
+  color: var(--accent);
+}
+
+.phone-link svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+
+.book-btn {
+  text-decoration: none;
+  background: var(--accent);
+  color: #FFFFFF;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 22px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color .25s ease, transform .2s ease;
+}
+
+.book-btn:hover {
+  background: var(--accent-hover);
+}
+
+.book-btn svg {
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
+.menu-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: var(--text);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.menu-icon span {
+  height: 2px;
+  width: 24px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: transform .3s cubic-bezier(0.4, 0, 0.2, 1), opacity .3s ease;
+}
+
+#mainHeader.mobile-open .menu-icon span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+#mainHeader.mobile-open .menu-icon span:nth-child(2) {
+  opacity: 0;
+}
+#mainHeader.mobile-open .menu-icon span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ================= MOBILE OVERLAY ================= */
+.nav-dropdown {
+  position: fixed;
+  top: 96px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 96px);
+  background: var(--bg);
+  padding: 24px;
+  overflow-y: auto;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease,
+              transform 0.3s ease,
+              visibility 0.3s ease,
+              top 0.3s ease,
+              height 0.3s ease;
+  pointer-events: none;
+}
+
+#mainHeader.scrolled .nav-dropdown {
+  top: 78px;
+  height: calc(100vh - 78px);
+}
+
+#mainHeader.mobile-open .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mobile-utilities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(15, 17, 21, .12);
+}
+
+.mobile-phone-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+  padding: 12px 28px;
+  border-radius: 8px;
+  background: rgba(3, 33, 79, 0.05);
+  border: 1px solid var(--steel);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: background-color 0.25s ease;
+}
+
+.mobile-phone-link svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.2;
+}
+
+.mobile-book-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 28px;
+  border-radius: 8px;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.mobile-book-link:active {
+  transform: scale(0.98);
+  background: var(--accent-hover);
+}
+
+.mobile-book-link svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 14px 18px;
+  background: rgba(15, 17, 21, .03);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+  background: rgba(3, 33, 79, 0.07);
+}
+
+.nav-socials {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin-top: auto;
+  padding-top: 32px;
+}
+
+.nav-socials .location-tag {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nav-socials .nav-facebook {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-socials .nav-facebook:hover {
+  color: var(--accent);
+  background: rgba(3, 33, 79, 0.06);
+}
+
+.nav-socials .nav-facebook svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent);
+}
+
+@media (max-width: 1100px) {
+  .desktop-nav { display: none; }
+  .right-zone .desktop-only-util { display: none; }
+  .header-inner { padding: 0 20px; }
+}
+
+@media (min-width: 1101px) {
+  .menu-icon { display: none; }
+  .nav-dropdown { display: none !important; }
+}
+</style>
+
+<header id="mainHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo" aria-label="Rush's Cleaning INC. Home">
+      <img src="images/Logo2.png" class="logo-img" alt="Rush's Cleaning INC. Logo" />
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main Navigation">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#Areas">Areas We Serve</a></li>
+      </ul>
+    </nav>
+
+    <div class="right-zone">
+      <a href="tel:3048411587" class="phone-link desktop-only-util">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (304) 841-1587
+      </a>
+
+      <a href="quote.html" rel="noopener noreferrer" class="book-btn desktop-only-util">
+        Get a quote
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <button class="menu-icon" id="menuToggle" aria-label="Toggle Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <nav class="nav-dropdown" aria-label="Mobile Navigation">
+    <div class="mobile-utilities">
+      <a href="tel:3048411587" class="mobile-phone-link">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (304) 841-1587
+      </a>
+
+      <a href="quote.html" rel="noopener noreferrer" class="mobile-book-link">
+        Get a quote
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#services" class="mobile-nav-close">Services</a></li>
+      <li><a href="#Areas" class="mobile-nav-close">Areas We Serve</a></li>
+
+    </ul>
+
+    <ul class="nav-socials">
+      <li class="location-tag">Rush's Cleaning INC. &bull; Charles Town, WV</li>
+      <li>
+        <a href="https://www.facebook.com/profile.php?id=61594657992984" target="_blank" rel="noopener noreferrer" class="nav-facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Follow Rush's Cleaning INC. on Facebook
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+(function() {
+  const header = document.getElementById('mainHeader');
+  const toggle = document.getElementById('menuToggle');
+  const body = document.body;
+
+  // Header scroll class toggle
+  window.addEventListener('scroll', () => {
+    if (header) {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    }
+  });
+
+  // Close Mobile Overlay
+  const closeMobileMenu = () => {
+    if (header.classList.contains('mobile-open')) {
+      header.classList.remove('mobile-open');
+      body.classList.remove('lock-scroll');
+      if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    }
+  };
+
+  // Hamburger button toggle
+  if (toggle) {
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpening = !header.classList.contains('mobile-open');
+      header.classList.toggle('mobile-open');
+      toggle.setAttribute('aria-expanded', isOpening.toString());
+      body.classList.toggle('lock-scroll', isOpening);
+    });
+  }
+
+  // Mobile Dropdown Accordion Toggle
+  const mobileSubmenuLinks = header.querySelectorAll('.nav-links .has-submenu > a');
+  mobileSubmenuLinks.forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const parent = anchor.parentElement;
+      const isOpen = parent.classList.toggle('open');
+      anchor.setAttribute('aria-expanded', isOpen.toString());
+    });
+  });
+
+  // Close mobile menu ONLY when clicking actual destination links
+  const navActionLinks = header.querySelectorAll('.mobile-nav-close');
+  navActionLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeMobileMenu();
+    });
+  });
+
+  // Reset menu on resize
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1100 && header.classList.contains('mobile-open')) {
+      closeMobileMenu();
+    }
+  });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+<style>
+  .hero-banner {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 180px);
+    min-height: 420px;
+    overflow: hidden;
+    background-color: #0a0a0a;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 100px 8% 50px;
+    text-align: left;
+    z-index: 1;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  /* Dark fade strictly on the left behind the text for easy visibility */
+  .hero-slide::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.7) 42%,
+      rgba(0, 0, 0, 0) 75%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 620px;
+    margin-left: 0;
+    margin-right: auto;
+    text-align: left;
+    color: var(--text);
+  }
+
+  .hero-headline {
+    font-size: clamp(2rem, 4vw, 3.25rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 14px 0;
+    color: #fff;
+    text-align: left;
+  }
+
+  .hero-subline {
+    font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+    color: #efefef;
+    opacity: 0.92;
+    text-align: left;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  /* Primary Button matching Header .book-btn */
+  .hero-btn-main {
+    text-decoration: none;
+    background: var(--accent);
+    color: #FFFFFF;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 22px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color .25s ease, transform .2s ease;
+    border: 1px solid var(--accent);
+  }
+
+  .hero-btn-main:hover {
+    background: var(--accent-hover);
+  }
+
+  .hero-btn-main svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+  }
+
+  /* Secondary Button styled with #00C0FE */
+  .hero-btn-secondary {
+    text-decoration: none;
+    background: #00C0FE;
+    color: #0F1115;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 12px 22px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background-color .25s ease, transform .2s ease;
+    border: 1px solid #00C0FE;
+  }
+
+  .hero-btn-secondary:hover {
+    background: #00a6da;
+  }
+
+  @media (max-width: 768px) {
+    .hero-banner {
+      height: calc(100vh - 140px);
+    }
+    
+    .hero-slide {
+      padding: 110px 6% 60px;
+      align-items: flex-end;
+      justify-content: flex-start;
+    }
+
+    .hero-slide::after {
+      background: linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.6) 60%,
+        rgba(0, 0, 0, 0.1) 100%
+      );
+    }
+  }
+</style>
+
+<section class="hero-banner" aria-label="Featured Hero Banner">
+  <div class="hero-slide">
+    <img src="images/Banner.jpg" alt="Rush's Cleaning INC. Full-Service Cleaning in Charles Town, WV" class="hero-bg" />
+    <div class="hero-content">
+      <h1 class="hero-headline">All-In-One Cleaning &amp; in Charles Town, WV.</h1>
+      <p class="hero-subline">From deep home cleans and commercial upkeep to RVs, work rigs, and heavy-duty yard cleanups no job is too tough for us.</p>
+      <div class="hero-actions">
+        <a href="quote.html" class="hero-btn-main">
+          Get a quote
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#services" class="hero-btn-secondary">All Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .services-grid-section {
+    width: 100%;
+    padding: 70px 8%;
+    box-sizing: border-box;
+
+    color: var(--text);
+  }
+
+  .services-header {
+    max-width: 1280px;
+    margin: 0 auto 36px;
+    text-align: left;
+  }
+
+  .services-heading {
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .service-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    box-shadow: 0 2px 12px rgba(15, 17, 21, 0.04);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .service-card:hover {
+    border-color: var(--steel);
+    box-shadow: 0 8px 24px rgba(15, 17, 21, 0.08);
+  }
+
+  .service-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: rgba(3, 33, 79, 0.06);
+    border: 1px solid rgba(3, 33, 79, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+    color: var(--accent);
+  }
+
+  .service-icon-box svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .service-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 8px 0;
+    color: var(--text);
+  }
+
+  .service-desc {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .services-grid-section {
+      padding: 45px 6%;
+    }
+
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<section id="services" class="services-grid-section" aria-label="Our Services">
+  <div class="services-header">
+    <h2 class="services-heading">Our Services</h2>
+  </div>
+
+  <div class="services-grid">
+
+    <!-- 1. Homes & Deep Cleans -->
+    <article class="service-card">
+      <div class="service-icon-box" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Homes &amp; Deep Cleans</h3>
+      <p class="service-desc">Seasonal fall and winter prep and routine house cleaning.</p>
+    </article>
+
+    <!-- 2. Businesses & Offices -->
+    <article class="service-card">
+      <div class="service-icon-box" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+          <path d="M9 22v-4h6v4"/>
+          <path d="M8 6h.01M16 6h.01M8 10h.01M16 10h.01M8 14h.01M16 14h.01"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Businesses &amp; Offices</h3>
+      <p class="service-desc">Reliable commercial upkeep for offices and local businesses.</p>
+    </article>
+
+    <!-- 3. Vehicles & Detailing -->
+    <article class="service-card">
+      <div class="service-icon-box" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/>
+          <circle cx="7" cy="17" r="2"/>
+          <path d="M9 17h6"/>
+          <circle cx="17" cy="17" r="2"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Vehicles &amp; Detailing</h3>
+      <p class="service-desc">Cleaning and detailing for cars, trucks, and work rigs.</p>
+    </article>
+
+    <!-- 4. Campers & RVs -->
+    <article class="service-card">
+      <div class="service-icon-box" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M18 17h2a2 2 0 0 0 2-2V9a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v6a2 2 0 0 0 2 2h2"/>
+          <path d="M10 17h4"/>
+          <circle cx="8" cy="17" r="2"/>
+          <circle cx="16" cy="17" r="2"/>
+          <path d="M2 11h20"/>
+          <path d="M12 5v6"/>
+          <path d="M16 5v6"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Campers &amp; RVs</h3>
+      <p class="service-desc">Pre-trip prep and end-of-season winterizing cleanouts.</p>
+    </article>
+
+    <!-- 5. Move-In / Move-Out -->
+    <article class="service-card">
+      <div class="service-icon-box" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+          <line x1="12" y1="22.08" x2="12" y2="12"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Move-In / Move-Out</h3>
+      <p class="service-desc">Full property turnovers between tenants or before moving in.</p>
+    </article>
+
+    <!-- 6. Yard & Exterior Cleanup -->
+    <article class="service-card">
+      <div class="service-icon-box" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+          <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+        </svg>
+      </div>
+      <h3 class="service-title">Yard &amp; Exterior Cleanup</h3>
+      <p class="service-desc">Debris, leaves, and heavy-duty outdoor cleanup jobs.</p>
+    </article>
+
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .service-area-section {
+    width: 100%;
+    padding: 70px 8%;
+    box-sizing: border-box;
+
+    color: var(--text);
+  }
+
+  .service-area-header {
+    max-width: 1280px;
+    margin: 0 auto 36px;
+    text-align: left;
+  }
+
+  .service-area-heading {
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 10px 0;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+
+  .service-area-subtext {
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--text-muted);
+    max-width: 700px;
+  }
+
+  .service-area-layout {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 24px;
+    max-width: 1280px;
+    margin: 0 auto;
+    align-items: stretch;
+  }
+
+  .area-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 12px rgba(15, 17, 21, 0.04);
+  }
+
+  /* Map Placeholder Box */
+  .area-map-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 360px;
+    background: rgba(3, 33, 79, 0.04);
+    border: 2px dashed rgba(3, 33, 79, 0.22);
+    border-radius: 12px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  .map-placeholder-icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    background: rgba(3, 33, 79, 0.08);
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-placeholder-icon svg {
+    width: 26px;
+    height: 26px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .map-placeholder-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .map-placeholder-text {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+    max-width: 400px;
+    margin: 0;
+  }
+
+  /* Cities Panel */
+  .area-cities-body {
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 24px;
+    text-align: left;
+  }
+
+  .area-cities-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.25;
+    margin: 0 0 8px 0;
+    color: var(--text);
+  }
+
+  .area-cities-desc {
+    font-size: 0.94rem;
+    line-height: 1.5;
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .city-links-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .city-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    background-color: rgba(3, 33, 79, 0.04);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .city-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.2;
+  }
+
+  .area-footer-note {
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .area-zip-text {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .area-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 8px;
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+    color: #FFFFFF;
+    transition: background-color 0.25s ease;
+  }
+
+  .area-cta-btn:hover {
+    background-color: var(--accent-hover);
+  }
+
+  .area-cta-btn svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+  }
+
+  @media (max-width: 1024px) {
+    .service-area-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .area-map-placeholder {
+      min-height: 280px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .service-area-section {
+      padding: 45px 6%;
+    }
+
+    .city-links-list {
+      grid-template-columns: 1fr;
+    }
+
+    .area-cities-body {
+      padding: 24px 20px;
+    }
+  }
+</style>
+
+<section id="Areas" class="service-area-section" aria-label="Areas We Serve">
+  <div class="service-area-header">
+    <h2 class="service-area-heading">Areas We Serve</h2>
+    <p class="service-area-subtext">Based in Charles Town, WV serving homes, businesses, and properties throughout Jefferson and Berkeley counties.</p>
+  </div>
+
+  <div class="service-area-layout">
+    <!-- Left Box: Google Business Profile Map Placeholder -->
+    <div class="area-map-placeholder">
+      <div class="map-placeholder-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/>
+          <circle cx="12" cy="11" r="2.2"/>
+        </svg>
+      </div>
+      <h3 class="map-placeholder-title">Service Area Map Placeholder</h3>
+      <p class="map-placeholder-text">This space will display your service area map once your Google Business Profile is set up if you decide to go forward with the site, I'll help you get that set up.</p>
+    </div>
+
+    <!-- Right Card: Local Towns & Communities -->
+    <div class="area-card area-cities-body">
+      <div>
+        <h3 class="area-cities-title">Local Cleaning &amp; Property Care Near You</h3>
+        <p class="area-cities-desc">We travel across Charles Town and surrounding Eastern Panhandle communities:</p>
+      </div>
+
+      <ul class="city-links-list">
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Charles Town, WV</span>
+        </li>
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Ranson, WV</span>
+        </li>
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Shepherdstown, WV</span>
+        </li>
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Martinsburg, WV</span>
+        </li>
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Harpers Ferry, WV</span>
+        </li>
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Kearneysville, WV</span>
+        </li>
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Inwood, WV</span>
+        </li>
+        <li class="city-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6-5.33-6-10a6 6 0 1 1 12 0c0 4.67-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>
+          <span>Bolivar, WV</span>
+        </li>
+      </ul>
+
+      <div class="area-footer-note">
+        <p class="area-zip-text">Don't see your town listed? Reach out to check availability.</p>
+        <a href="quote.html" class="area-cta-btn">
+          Get a quote
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<style>
+  .cta-banner-section {
+    width: 100%;
+    padding: 70px 8%;
+    box-sizing: border-box;
+
+    color: var(--text);
+  }
+
+  .cta-banner-card {
+    max-width: 1280px;
+    margin: 0 auto;
+    background-color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 56px 48px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+    box-shadow: 0 12px 32px rgba(3, 33, 79, 0.14);
+  }
+
+  .cta-banner-heading {
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 14px 0;
+    color: #FFFFFF;
+    letter-spacing: -0.01em;
+    max-width: 720px;
+  }
+
+  .cta-banner-subtext {
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.55;
+    margin: 0 0 32px 0;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 640px;
+  }
+
+  .cta-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  /* Single Primary Button styled with #00C0FE */
+  .cta-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 28px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 8px;
+    background-color: #00C0FE;
+    border: 1px solid #00C0FE;
+    color: #0F1115;
+    transition: background-color 0.25s ease;
+  }
+
+  .cta-banner-btn:hover {
+    background-color: #00a6da;
+  }
+
+  .cta-banner-btn svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+  }
+
+  /* Plain Text Phone Link (matching header .phone-link) */
+  .cta-banner-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.98rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: #FFFFFF;
+    border-radius: 6px;
+    transition: color 0.2s ease;
+  }
+
+  .cta-banner-phone:hover {
+    color: #00C0FE;
+  }
+
+  .cta-banner-phone svg {
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: #00C0FE;
+    stroke-width: 2.2;
+  }
+
+  @media (max-width: 640px) {
+    .cta-banner-section {
+      padding: 45px 6%;
+    }
+
+    .cta-banner-card {
+      padding: 40px 24px;
+    }
+
+    .cta-banner-actions {
+      width: 100%;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .cta-banner-btn {
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+</style>
+
+<section class="cta-banner-section" aria-label="Request a Quote">
+  <div class="cta-banner-card">
+    <h2 class="cta-banner-heading">Ready to Get Your Home, Vehicle, or Yard Cleaned?</h2>
+    <p class="cta-banner-subtext">Reach out today for a free quote in Charles Town, WV and surrounding Eastern Panhandle, no job is too tough.</p>
+
+    <div class="cta-banner-actions">
+      <a href="quote.html" class="cta-banner-btn">
+        Get a quote
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <a href="tel:3048411587" class="cta-banner-phone">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        (304) 841-1587
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  :root {
+    --bg-light: #f8f9fa;
+    --text-dark: #0F1115;
+    --text-muted: #555E6D;
+    --card-bg: #ffffff;
+    --border: rgba(15, 17, 21, .08);
+    --gold: #f59e0b;
+
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    font-family: "Montserrat", sans-serif;
+
+    line-height: 1.6;
+  }
+
+  
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* ================= FOOTER SYSTEM STYLES ================= */
+.site-footer {
+  background: var(--bg, #FFFFFF);
+  color: var(--text, #0F1115);
+  font-family: "Montserrat", sans-serif;
+  border-top: 1px solid var(--border, rgba(15, 17, 21, .1));
+  padding: 64px 0 32px 0;
+  margin-top: auto;
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 48px;
+}
+
+/* LEFT COLUMN: BRAND & CONTACT INFO */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-logo-img {
+  height: auto;
+  width: 180px;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-contact-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-phone {
+  text-decoration: none;
+  color: var(--text, #0F1115);
+  font-size: 1rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s ease;
+}
+
+.footer-phone:hover {
+  color: var(--accent, #03214F);
+}
+
+.footer-phone svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent, #03214F);
+  fill: none;
+  stroke-width: 2.2;
+}
+
+.footer-address {
+  color: var(--text-muted, #555E6D);
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.4;
+}
+
+.footer-address svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--accent, #03214F);
+  fill: none;
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+
+.footer-facebook {
+  text-decoration: none;
+  color: var(--text-muted, #555E6D);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.2s ease;
+}
+
+.footer-facebook:hover {
+  color: var(--accent, #03214F);
+}
+
+.footer-facebook svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent, #03214F);
+}
+
+/* BUSINESS HOURS COLUMN */
+.footer-hours {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-hours-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-muted, #555E6D);
+}
+
+.footer-hours-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-hours-list span.day {
+  font-weight: 700;
+  color: var(--text, #0F1115);
+}
+
+/* QUICK LINKS COLUMN */
+.footer-column-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text, #0F1115);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--accent, #03214F);
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links a:hover {
+  color: var(--accent-hover, #05337A);
+  transform: translateX(3px);
+}
+
+/* CENTERED BOTTOM BAR */
+.footer-bottom {
+  max-width: 1440px;
+  margin: 48px auto 0 auto;
+  padding: 24px 32px 0 32px;
+  border-top: 1px solid var(--border, rgba(15, 17, 21, .08));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted, #555E6D);
+}
+
+.footer-bottom a {
+  color: inherit;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.footer-bottom a:hover {
+  color: var(--accent, #03214F);
+}
+
+/* RESPONSIVE LAYOUT */
+@media (max-width: 900px) {
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+</style>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    
+    <!-- Column 1: Larger Logo & Contact -->
+    <div class="footer-brand">
+      <a href="index.html" aria-label="Rush's Cleaning INC. Home">
+        <img src="images/Logo2.png" class="footer-logo-img" alt="Rush's Cleaning INC. Logo" />
+      </a>
+      
+      <div class="footer-contact-block">
+        <a href="tel:3048411587" class="footer-phone">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (304) 841-1587
+        </a>
+
+        <span class="footer-address">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Charles Town, WV</span>
+        </span>
+
+        <a href="https://www.facebook.com/profile.php?id=61594657992984" target="_blank" rel="noopener noreferrer" class="footer-facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Follow us on Facebook
+        </a>
+      </div>
+    </div>
+
+    <!-- Column 2: Business Hours -->
+    <div class="footer-hours">
+      <h3 class="footer-column-title">Business Hours</h3>
+      <ul class="footer-hours-list">
+        <li>
+          <span class="day">Mon – Fri</span>
+          <span>8:00 AM – 6:00 PM</span>
+        </li>
+        <li>
+          <span class="day">Sat – Sun</span>
+          <span>By Appointment</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Main Navigation Links -->
+    <div>
+      <h3 class="footer-column-title">Quick Links</h3>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#Areas">Areas We Serve</a></li>
+        <li><a href="quote.html">Get a Quote</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2026 Rush's Cleaning INC. All rights reserved.</p>
+    <p>Site by <a href="https://portfolio.stefanswebdesigns.workers.dev/" target="_blank" rel="noopener noreferrer">Stefan's Web Designs</a></p>
+  </div>
+</footer>
+</body>
+</html>

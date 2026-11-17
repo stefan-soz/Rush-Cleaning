@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Concept Site</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ================= SYSTEM DESIGN TOKENS ================= */
+    :root {
+      --bg: #FFFFFF;
+      --text: #0F1115;
+      --text-muted: #555E6D;
+      --accent: #03214F;            
+      --accent-hover: #05337A;        
+      --steel: rgba(3, 33, 79, .25);
+      --border: rgba(15, 17, 21, .1);
+      --bg-card: #FFFFFF;
+      --focus-ring: #03214F;
+      --error: #DC2626;
+      --error-bg: #FEF2F2;
+      --success: #16A34A;
+      --success-bg: #F0FDF4;
+    }
+
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      line-height: 1.6;
+    }
+
+    a:focus-visible {
+      outline: 2px solid var(--focus-ring);
+      outline-offset: 3px;
+    }
+
+    .concept-card {
+      background-color: var(--bg-card);
+      max-width: 520px;
+      width: 100%;
+      border: 1px solid rgba(15, 17, 21, 0.12);
+      border-radius: 20px;
+      padding: 44px 36px;
+      text-align: center;
+      box-shadow: 0 4px 24px rgba(15, 17, 21, 0.04);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .concept-card:hover {
+      border-color: var(--steel);
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      line-height: 1.35;
+      font-weight: 800;
+      margin-bottom: 12px;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #FFFFFF;
+      border: 1px solid var(--accent);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: background-color 0.25s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <main class="concept-card">
+    <h1>This is a concept site, so I have not made all the pages yet.</h1>
+    <p>These are the pages I have made:</p>
+    <div class="button-group">
+      <a href="index.html" class="btn">Main Page</a>
+      <a href="quote.html" class="btn">Get Quote Page</a>
+    </div>
+  </main>
+</body>
+</html>
